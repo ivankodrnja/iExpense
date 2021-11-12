@@ -23,7 +23,16 @@ struct ContentView: View {
                         }
                         Spacer()
                         
-                        Text(item.amount, format: .currency(code: "USD"))
+//                        Text(item.amount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                        
+                        switch item.amount {
+                            case ..<11:
+                                Text(item.amount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                                    .foregroundColor(Color.green)
+                            default:
+                                Text(item.amount, format: .currency(code: Locale.current.currencyCode ?? "USD"))
+                                    .foregroundColor(Color.red)
+                        }
                     }
                 }
                 .onDelete(perform: removeItems)
